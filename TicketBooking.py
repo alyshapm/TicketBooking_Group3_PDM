@@ -27,12 +27,13 @@ def ask_dest(stock):
         if stock[dest]['qty'] >= amount:
             sell(stock, dest, amount)
             break
+        elif stock[dest]['qty'] == 0:
+            print("Sorry, ticket has sold out.")
+            break
         elif stock[dest]['qty'] < amount:
             print('Sorry, there are insufficient number of tickets.')
             continue
-        else:
-            print("Sorry, ticket has sold out.")
-            break
+            # ask user if they would like to reenter a diffirent number, otherwise break
 
 def sell(stock, dest, amount):
     cost = amount * stock[dest]["price"]
@@ -46,7 +47,7 @@ def sell(stock, dest, amount):
 def main():
     stock = dict(cirebon=dict(code="TK001", time="08:30", qty=20, price=50000),
                  yogyakarta=dict(code="TK002", time="08:00", qty=25, price=100000),
-                 surabaya=dict(code="TK003", time="13:00", qty=30, price=200000),
+                 surabaya=dict(code="TK003", time="13:00", qty=0, price=200000),
                  )
     name = input('What is your name? ')
     print(f'Hi, {name}. Here is the list of embarkment:')
