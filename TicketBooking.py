@@ -17,11 +17,11 @@ def ask_dest(stock):
     while True:
         dest = input('Please enter your destination: ')
         dest = dest.lower()
-        if dest in stock:
-            break
-        else:
+        if dest not in stock:
             print("Invalid input: must be from the list of destination.")
             continue
+        else:
+            break
     while True:
         amount = pyip.inputNum("How many tickets? ", min=1)
         if stock[dest]['qty'] >= amount:
