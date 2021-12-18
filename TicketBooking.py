@@ -30,6 +30,7 @@ def ask_dest(stock):
             break
         elif stock[dest]['qty'] == 0:
             print("Sorry, ticket has sold out.")
+            repurchase(stock)
             break
         elif stock[dest]['qty'] < amount:
             print('Sorry, there are insufficient number of tickets.')
@@ -42,10 +43,12 @@ def sell(stock, dest, amount):
     if "yes" == confirmation.lower():
         stock[dest]["qty"] -= amount
         print(f"Purchase summary: Departure to {dest} at {stock[dest]['time']} for {amount} persons. Please have your ticket ready at gate. Have a safe journey!")
-    repurchase = pyip.inputYesNo("Would you like to buy anything else?")
+    repurchase(stock)
+
+def repurchase(stock):
+    repurchase = pyip.inputYesNo("Would you like to buy anything else? [Yes/No]")
     if "yes" == repurchase.lower():
         main(stock)
-    # return stock
 
 def main(stock):
     displayMenu(stock)
