@@ -1,4 +1,6 @@
-def menu(stock):
+import pyinputplus as pyip
+
+def displayMenu(stock):
     item_length = 0
     for dest in stock:
         item_length = len(dest) if len(dest) > item_length else item_length
@@ -13,35 +15,43 @@ def menu(stock):
 
 def ask_dest(stock):
     while True:
-        dest = input('\nPlease enter your destination: ')
+        dest = input('Please enter your destination: ')
         dest = dest.lower()
-        amount = int(input("How many tickets? "))
-        # need input validation here if the amount is < 1.
+        if dest in stock:
+            break
+        else:
+            print("Invalid input: must be from the list of destination.")
+            continue
+    while True:
+        amount = pyip.inputNum("How many tickets? ", min=1)
         if stock[dest]['qty'] >= amount:
             sell(stock, dest, amount)
             break
         elif stock[dest]['qty'] < amount:
-            print('Sorry, {}s are out of stock'.format(dest))
-            break
-        else:
-            print("Sorry, we don't have that, look at the menu.")
+            print('Sorry, there are insufficient number of tickets.')
             continue
+        else:
+            print("Sorry, ticket has sold out.")
+            break
 
 def sell(stock, dest, amount):
     cost = amount * stock[dest]["price"]
-    confirmation = input(f"Are you sure? That will be ${cost}. [Yes/No] ")
+    confirmation = pyip.inputYesNo(f"Are you sure? That will be ${cost}. [Yes/No] ")
     if "yes" == confirmation.lower():
         stock[dest]["qty"] -= amount
-        print(f"Purchase summary: Departure to {dest} at {stock[dest]['time']}. Please have your ticket ready at gate. Have a safe journey!")
+        print(f"Purchase summary: Departure to {dest} at {stock[dest]['time']} for {amount} persons. Please have your ticket ready at gate. Have a safe journey!")
         return stock
     # ask user if they would like to purchase again. if yes, then repeat from step 1 (print menu, and so on)
-
-if __name__ == '__main__':
+    # try if yes: main() else: break or something
+def main():
     stock = dict(cirebon=dict(code="TK001", time="08:30", qty=20, price=50000),
                  yogyakarta=dict(code="TK002", time="08:00", qty=25, price=100000),
                  surabaya=dict(code="TK003", time="13:00", qty=30, price=200000),
                  )
     name = input('What is your name? ')
     print(f'Hi, {name}. Here is the list of embarkment:')
-    menu(stock)
+    displayMenu(stock)
     ask_dest(stock)
+
+if __name__ == '__main__':
+    main()
