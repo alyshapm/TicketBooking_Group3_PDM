@@ -16,10 +16,8 @@ def buyTicket():
             numTicket = int(input("Re-enter valid number of ticket: "))
     else:
         destination = input("Re-enter valid destination: ")
-    
     print()
     summary.append(Ticket(destination, numTicket))
-
     return summary
 
 def sumTicket(sumTic):

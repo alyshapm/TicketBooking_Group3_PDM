@@ -38,23 +38,24 @@ def ask_dest(stock):
 
 def sell(stock, dest, amount):
     cost = amount * stock[dest]["price"]
-    confirmation = pyip.inputYesNo(f"Are you sure? That will be ${cost}. [Yes/No] ")
+    confirmation = pyip.inputYesNo(f"Are you sure? That will be Rp.{cost}. [Yes/No] ")
     if "yes" == confirmation.lower():
         stock[dest]["qty"] -= amount
         print(f"Purchase summary: Departure to {dest} at {stock[dest]['time']} for {amount} persons. Please have your ticket ready at gate. Have a safe journey!")
-        return stock
-    # ask user if they would like to purchase again. if yes, then repeat from step 1 (print menu, and so on)
-    # try if yes: main() else: break or something
+    repurchase = pyip.inputYesNo("Would you like to buy anything else?")
+    if "yes" == repurchase.lower():
+        main(stock)
+    # return stock
 
-def main():
+def main(stock):
+    displayMenu(stock)
+    ask_dest(stock)
+
+if __name__ == '__main__':
     stock = dict(cirebon=dict(code="TK001", time="08:30", qty=20, price=50000),
                  yogyakarta=dict(code="TK002", time="08:00", qty=25, price=100000),
                  surabaya=dict(code="TK003", time="13:00", qty=0, price=200000),
                  )
     name = input('What is your name? ')
     print(f'Hi, {name}. Here is the list of embarkment:')
-    displayMenu(stock)
-    ask_dest(stock)
-
-if __name__ == '__main__':
-    main()
+    main(stock)

@@ -1,5 +1,5 @@
 class Ticket:
-    def __init__(self, destination="", numTicket=0000):
+    def __init__(self, destination="", numTicket=0):
         self.destination = destination
         self.numTicket = numTicket
         self.fare = self.fromPricelist()
@@ -11,17 +11,6 @@ class Ticket:
     def setNumTicket(self, numTicket):
         self.numTicket = numTicket
     
-    def fromPricelist(self):
-        if self.destination == "Cirebon":
-            self.fare = 50000
-        elif self.destination == "Yogyakarta":
-            self.fare = 100000
-        elif self.destination == "Surabaya":
-            self.fare = 200000
-        else:
-            self.fare = 0
-        return self.fare
-
     def checkTicketStock(self):
         if self.destination == "Cirebon":
             self.stock = 20
@@ -32,6 +21,24 @@ class Ticket:
         else:
             self.stock = 0
         return self.stock
+
+    def processTicket(self):
+        if self.numTicket <= self.stock:
+            self.stock -= self.numTicket
+            return self.stock
+        else:
+            print("Not enough ticket.")
+
+    def fromPricelist(self):
+        if self.destination == "Cirebon":
+            self.fare = 50000
+        elif self.destination == "Yogyakarta":
+            self.fare = 100000
+        elif self.destination == "Surabaya":
+            self.fare = 200000
+        else:
+            self.fare = 0
+        return self.fare
     
     def nameTrain(self):
         if self.destination == "Cirebon":
@@ -43,13 +50,6 @@ class Ticket:
         else:
             self.name = "none"
         return self.name
-    
-    def processTicket(self):
-        if self.numTicket <= self.stock:
-            self.stock -= self.numTicket
-        else:
-            print("Not enough ticket.")
-        return self.stock
     
     def getTotalCost(self):
         self.totalCost = self.numTicket * self.fare
