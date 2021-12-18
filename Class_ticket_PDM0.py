@@ -47,8 +47,8 @@ class Ticket:
     def processTicket(self):
         if self.numTicket <= self.stock:
             self.stock -= self.numTicket
-        else:
-            print("Not enough ticket.")
+        elif self.numTicket > self.stock:
+            print("Too much ticket.")
         return self.stock
     
     def getTotalCost(self):
