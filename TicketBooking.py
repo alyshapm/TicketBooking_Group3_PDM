@@ -14,7 +14,6 @@ def displayMenu(stock):
         print(f"{name.capitalize():<{item_length}} {details[code]:<8} {details[time]:<7} Rp.{details[price]:<10} {details[qty]:<5}")
 
 def ask_dest(stock):
-    # try to make this function shorter and more efficient
     while True:
         dest = input('Please enter your destination: ')
         dest = dest.lower()
@@ -35,7 +34,6 @@ def ask_dest(stock):
         elif stock[dest]['qty'] < amount:
             print('Sorry, there are insufficient number of tickets.')
             continue
-            # ask user if they would like to reenter a diffirent number, otherwise break
 
 def sell(stock, dest, amount):
     cost = amount * stock[dest]["price"]
