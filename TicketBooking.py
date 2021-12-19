@@ -57,7 +57,7 @@ def main(stock):
 if __name__ == '__main__':
     stock = dict(cirebon=dict(code="TK001", time="08:30", qty=20, price=50000),
                  yogyakarta=dict(code="TK002", time="08:00", qty=25, price=100000),
-                 surabaya=dict(code="TK003", time="13:00", qty=0, price=200000),
+                 surabaya=dict(code="TK003", time="13:00", qty=30, price=200000),
                  )
     name = input('What is your name? ')
     print(f'Hi, {name}. Here is the list of embarkment:')
