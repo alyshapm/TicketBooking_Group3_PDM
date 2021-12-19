@@ -40,11 +40,11 @@ def sell(stock, dest, amount):
     confirmation = pyip.inputYesNo(f"Are you sure? That will be Rp.{cost}. [Yes/No] ")
     if "yes" == confirmation.lower():
         stock[dest]["qty"] -= amount
-        print(f"Purchase summary: Departure to {dest} at {stock[dest]['time']} for {amount} persons. Please have your ticket ready at gate. Have a safe journey!")
+        print(f"Purchase summary: Departure to {dest} at {stock[dest]['time']} for {amount} persons.\nPlease have your ticket ready at gate. Have a safe journey!")
     repurchase(stock)
 
 def repurchase(stock):
-    repurchase = pyip.inputYesNo("Would you like to buy anything else? [Yes/No]")
+    repurchase = pyip.inputYesNo("Would you like to buy anything else? [Yes/No] ")
     if "yes" == repurchase.lower():
         main(stock)
 
