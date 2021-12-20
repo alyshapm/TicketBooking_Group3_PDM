@@ -12,3 +12,9 @@ Code a simple ticket booking that asks for how many tickets to purhcase. Then th
 Python
 
 ## Database
+
+Code   | Destination  | Fare     | Stock |
+------ | ------------ | -------- | ----- |
+TK001  | Cirebon      | 50000    | 20    |
+TK002  | Yogyakarta.  | 100000   | 25    |
+TK003  | Surabata     | 200000   | 30    |
